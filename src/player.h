@@ -49,6 +49,10 @@ private:
 	
 	float movementSpeed;
 	
+
+	sf::Texture tex_player ;
+
+	
 	//soundhandler
 	//SoundHandler* s;
 	

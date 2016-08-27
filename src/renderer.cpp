@@ -39,24 +39,11 @@ Renderer::Renderer(sf::RenderWindow *window, GameState *state)
 void Renderer::drawGame()
 {
 	m_wnd->clear();
+	
+	
+	
 
-    sf::Sprite sprite_background;
-	sprite_background.setTexture(m_texture_background);
-	sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
-	m_wnd->draw(sprite_background);
-
-    
-    sf::Sprite sprite_screws;
-	sprite_screws.setTexture(m_texture_screws);
-
-	std::vector<sf::Vector2f> screws = m_gst->getScrewLocations();
-	std::vector<sf::Vector2f>::iterator s_it;
-
-	for(s_it = screws.begin();s_it != screws.end();s_it++)
-	{
-		sprite_screws.setPosition(*s_it);
-		m_wnd->draw(sprite_screws);
-	}
+	
 
 	if(m_gst->getGameState() == STATE_MENU)
 	{
@@ -74,10 +61,34 @@ void Renderer::drawGame()
 		text_help.setCharacterSize(20);
 		text_help.setPosition(sf::Vector2f(m_wnd->getSize().x/2 - text_help.getLocalBounds().width/2,500));
 		m_wnd->draw(text_help);
+		
+		sf::Sprite sprite_background;
+		sprite_background.setTexture(m_texture_background);
+		sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
+		m_wnd->draw(sprite_background);
 	}
 	else
 	{
-	
+		sf::View view = sf::View(m_gst->player->getPosition(), sf::Vector2f(1280,800));
+		m_wnd->setView(view);
+
+		sf::Sprite sprite_background;
+		sprite_background.setTexture(m_texture_background);
+		sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
+		m_wnd->draw(sprite_background);
+
+		
+		sf::Sprite sprite_screws;
+		sprite_screws.setTexture(m_texture_screws);
+
+		std::vector<sf::Vector2f> screws = m_gst->getScrewLocations();
+		std::vector<sf::Vector2f>::iterator s_it;
+		
+		for(s_it = screws.begin();s_it != screws.end();s_it++)
+		{
+			sprite_screws.setPosition(*s_it);
+			m_wnd->draw(sprite_screws);
+		}
 		//wall test
 		//Wall test(sf::FloatRect(0,0,80,80),m_texture_screws);
 		//m_wnd->draw(test);
@@ -86,11 +97,11 @@ void Renderer::drawGame()
 		//Level ltest("levels/level0.dat");
 		m_wnd->draw(*m_gst->level);
 		
-		sf::Sprite sprite_player;
-		sprite_player.setTexture(m_texture_player);
-		sprite_player.setPosition(m_gst->player->getPosition());
-		m_wnd->draw(sprite_player);
-
+		//sf::Sprite sprite_player;
+		//sprite_player.setTexture(m_texture_player);
+		//sprite_player.setPosition(m_gst->player->getPosition());
+		//m_wnd->draw(sprite_player);
+		m_wnd->draw(*m_gst->player);
 		
 		std::stringstream str;
 		str << m_gst->getCollectedScrewsCount() << " collected\n" << m_gst->getVisibleScrewsCount() << " visible";

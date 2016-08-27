@@ -21,6 +21,9 @@ Player::Player(Level* lev)
 //	reload_time = 40;
 //	shoot_threshold = 0;
 //	leben = 100.0f;
+	tex_player.loadFromFile("assets/robot.png");
+
+
 }
 
 
@@ -141,5 +144,10 @@ void Player::resetLevel(Level* level)
 
 void Player::draw(sf::RenderTarget& target,sf::RenderStates states)const
 {
+	sf::Sprite sprite_player;
+	sprite_player.setTexture(tex_player);
+	sprite_player.setPosition(position);
+	target.draw(sprite_player);
 	
+
 }

@@ -27,7 +27,6 @@ private:
 
 	sf::Vector2f levelBounds;
 	sf::Texture texture;
-	sf::View view;
 	
 	// first char of levelpath
 	char* beginLevelPath;

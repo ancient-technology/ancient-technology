@@ -12,6 +12,8 @@ GameState::GameState(int x, int y)
 	// Set initial player movement and location
 	setPlayerMovementDirection(DIRECTION_NONE);
 	setPlayerLocation(sf::Vector2f(x/2-ROBOT_WIDTH/2,y/2-ROBOT_HEIGHT/2));
+	
+	level = Level("levels/level0.dat");
 
 	// Initialize random seed
 	srand (static_cast <unsigned> (time(0)));

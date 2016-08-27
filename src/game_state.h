@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "level.h"
 
 #define STATE_MENU 0
 #define STATE_PLAYING 1
@@ -34,6 +35,9 @@ public:
 	std::vector<sf::Vector2f> getScrewLocations();
 	int getVisibleScrewsCount();
 	int getCollectedScrewsCount();
+	Level level;
+		
+		
 private:
 	int m_game_state;
 	int m_size_x;
@@ -43,6 +47,7 @@ private:
 	std::vector<sf::Vector2f> m_screw_locations;
 	float m_new_screw_threshold;
 	int m_screws_collected;
+
 };
 
 #endif

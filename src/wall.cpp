@@ -4,7 +4,7 @@
 Wall::Wall(sf::FloatRect rect,sf::Texture tex)
 {
 	//set walls position
-	//position = pos;
+	position = sf::Vector2f(rect.left,rect.top);
 	
 	//init rect
 	this->rect = rect;
@@ -43,7 +43,7 @@ void Wall::draw(sf::RenderTarget& target,sf::RenderStates states)const
 	sf::Sprite sprite_wall;
 	sprite_wall.setTexture(texture);
 	
-	sprite_wall.setTextureRect((sf::IntRect)rect);
+	//sprite_wall.setTextureRect((sf::IntRect)rect);
 	sprite_wall.setPosition(position);
 	target.draw(sprite_wall);
 }

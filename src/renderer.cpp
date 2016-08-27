@@ -1,5 +1,5 @@
 #include "renderer.h"
-#include "wall.h"
+
 
 Renderer::Renderer(sf::RenderWindow *window, GameState *state)
 {
@@ -81,6 +81,16 @@ void Renderer::drawGame()
 	}
 	else
 	{
+	
+		//wall test
+		//Wall test(sf::FloatRect(0,0,80,80),m_texture_screws);
+		//m_wnd->draw(test);
+		
+		//Level test
+		//Level ltest("levels/level0.dat");
+		m_wnd->draw(m_gst->level);
+		
+		
 		std::stringstream str;
 		str << m_gst->getCollectedScrewsCount() << " collected\n" << m_gst->getVisibleScrewsCount() << " visible";
 
@@ -92,9 +102,7 @@ void Renderer::drawGame()
 		text_screws.setPosition(sf::Vector2f(30,30));
 		m_wnd->draw(text_screws);
 		
-		//wall test
-		//Wall test(sf::FloatRect(0,0,80,80),m_texture_screws);
-		//m_wnd->draw(test);
+		
 		
 	}
 	

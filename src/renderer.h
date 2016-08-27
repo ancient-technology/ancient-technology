@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include "game_state.h"
+#include "level.h"
 
 class Renderer
 {

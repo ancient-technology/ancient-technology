@@ -45,11 +45,7 @@ void Renderer::drawGame()
 	sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
 	m_wnd->draw(sprite_background);
 
-    sf::Sprite sprite_player;
-	sprite_player.setTexture(m_texture_player);
-	sprite_player.setPosition(m_gst->getPlayerLocation());
-	m_wnd->draw(sprite_player);
-
+    
     sf::Sprite sprite_screws;
 	sprite_screws.setTexture(m_texture_screws);
 
@@ -88,8 +84,13 @@ void Renderer::drawGame()
 		
 		//Level test
 		//Level ltest("levels/level0.dat");
-		m_wnd->draw(m_gst->level);
+		m_wnd->draw(*m_gst->level);
 		
+		sf::Sprite sprite_player;
+		sprite_player.setTexture(m_texture_player);
+		sprite_player.setPosition(m_gst->player->getPosition());
+		m_wnd->draw(sprite_player);
+
 		
 		std::stringstream str;
 		str << m_gst->getCollectedScrewsCount() << " collected\n" << m_gst->getVisibleScrewsCount() << " visible";

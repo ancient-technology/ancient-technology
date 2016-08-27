@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "level.h"
+#include "player.h"
 
 #define STATE_MENU 0
 #define STATE_PLAYING 1
@@ -35,7 +36,8 @@ public:
 	std::vector<sf::Vector2f> getScrewLocations();
 	int getVisibleScrewsCount();
 	int getCollectedScrewsCount();
-	Level level;
+	Level* level;
+	Player* player;
 		
 		
 private:

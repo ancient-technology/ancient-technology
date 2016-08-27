@@ -6,7 +6,7 @@ Level::Level(std::string levelPath)
 {
 	beginLevelPath = &levelPath.at(0);
 	
-	tex_wall.loadFromFile("assets/screws.png");
+	tex_wall.loadFromFile("assets/wall.png");
 	
 	//
 	initLevel();
@@ -33,7 +33,7 @@ void Level::initLevel()
     			//Player
     			case 'p':
     			case 'P':
-    	//			playerStart = (sf::Vector2f(col*ROBOTSIZE,row*ROBOTSIZE));
+    				playerStart = (sf::Vector2f(col*WALLSIZE,row*WALLSIZE));
     				break;
     				
     			//Wall
@@ -52,7 +52,7 @@ void Level::initLevel()
     	}
     }
     // bestimme levelbounds
-    //levelBounds = sf::Vector2f(col,row); 
+    levelBounds = sf::Vector2f(col*WALLSIZE,row*WALLSIZE); 
 }
 
 void Level::draw(sf::RenderTarget& target,sf::RenderStates states)const
@@ -68,4 +68,26 @@ void Level::draw(sf::RenderTarget& target,sf::RenderStates states)const
 		target.draw(*it);
 		
    	}  //*/
+}
+
+sf::Vector2f Level::getPlayerStart()
+{
+	return playerStart;
+}
+
+sf::Vector2f Level::wallCollision(sf::Vector2f position,sf::FloatRect* box,sf::Vector2f moveVector)
+{
+	for (std::list<Wall>::iterator it = walls.begin(); it != walls.end(); it++)
+   	{
+		if(it->isCollision(position,box))
+		{
+			return sf::Vector2f(0,0);
+		}
+		
+   	} 
+	return moveVector;
+}
+sf::Vector2f Level::getBounds()
+{
+	return levelBounds;
 }

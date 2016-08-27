@@ -26,23 +26,23 @@ void EventHandler::handleEvents()
         // Get robot direction
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-        	m_gst->setPlayerMovementDirection(DIRECTION_LEFT);
+        	m_gst->player->setMovementDirection(DIRECTION_LEFT);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-        	m_gst->setPlayerMovementDirection(DIRECTION_RIGHT);
+        	m_gst->player->setMovementDirection(DIRECTION_RIGHT);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-        	m_gst->setPlayerMovementDirection(DIRECTION_UP);
+        	m_gst->player->setMovementDirection(DIRECTION_UP);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-        	m_gst->setPlayerMovementDirection(DIRECTION_DOWN);
+        	m_gst->player->setMovementDirection(DIRECTION_DOWN);
         }
         else
         {
-        	m_gst->setPlayerMovementDirection(DIRECTION_NONE);
+        	m_gst->player->setMovementDirection(DIRECTION_NONE);
         }
     }
 }

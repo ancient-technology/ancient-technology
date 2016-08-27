@@ -11,10 +11,7 @@ GameState::GameState(int x, int y)
 
 	// Set initial player movement and location
 	setPlayerMovementDirection(DIRECTION_NONE);
-	setPlayerLocation(sf::Vector2f(x/2-ROBOT_WIDTH/2,y/2-ROBOT_HEIGHT/2));
-	
-	level = Level("levels/level0.dat");
-
+		
 	// Initialize random seed
 	srand (static_cast <unsigned> (time(0)));
 }
@@ -28,10 +25,13 @@ void GameState::startPlaying()
 {
 	m_game_state = STATE_PLAYING;
 
+	level = new Level("levels/level0.dat");
+	setPlayerLocation(level->getPlayerStart());
+	player= new Player(level);
+
 	// Reset all values
 	m_screws_collected = 0;
 	setPlayerMovementDirection(DIRECTION_NONE);
-	setPlayerLocation(sf::Vector2f(m_size_x/2-ROBOT_WIDTH/2,m_size_y/2-ROBOT_HEIGHT/2));
 	m_screw_locations.clear();
 
 }
@@ -51,6 +51,8 @@ void GameState::updateGameState()
 		return;
 	}
 
+	player->move();
+	/*
 	// Update the player location
 	sf::Vector2f delta;
 
@@ -111,7 +113,7 @@ void GameState::updateGameState()
 			// Advance iterator to next screw
 			s_it++;
 		}
-	}
+	}//*/
 
 	// Add a new screw when threshold value is reached
 	m_new_screw_threshold += static_cast <float> (rand()) / static_cast <float> (RAND_MAX);

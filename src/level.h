@@ -16,15 +16,16 @@ class Level : public sf::Drawable
 public:
 	Level();
 	Level(std::string levelPath);
-	sf::Vector2f getPosition();
-	sf::FloatRect getRect();
-	bool isCollision(sf::Vector2f entPosition,sf::FloatRect* box);
+	sf::Vector2f getPlayerStart();
+	//manipuliert den moveVector sodass man nur bis zur Wand läuft
+	sf::Vector2f wallCollision(sf::Vector2f position,sf::FloatRect* box,sf::Vector2f moveVector);
+//	bool isCollision(sf::Vector2f entPosition,sf::FloatRect* box);
+	sf::Vector2f getBounds();
 
 private:
 	virtual void draw(sf::RenderTarget& target,sf::RenderStates states)const;
 
-	sf::Vector2f position;
-	sf::FloatRect rect;
+	sf::Vector2f levelBounds;
 	sf::Texture texture;
 	sf::View view;
 	
@@ -37,6 +38,8 @@ private:
 	std::list<Wall> walls;
 	
 	sf::Texture tex_wall;
+	
+	sf::Vector2f playerStart;
 };
 
 #endif

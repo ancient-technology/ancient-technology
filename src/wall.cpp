@@ -30,7 +30,7 @@ bool Wall::isCollision(sf::Vector2f entPosition,sf::FloatRect* box)
 	//std::cout << (distance.x*distance.x + distance.y*distance.y) /(80*80)<< "\n";
 	 
 	// 					  x^2 + y^2 				   < wurzel(2) * 80^2
-	if((distance.x*distance.x + distance.y*distance.y) < 9051)
+	//if((distance.x*distance.x + distance.y*distance.y) < 9051)
 		if(rect.intersects(*box))
 		{
 			return true;

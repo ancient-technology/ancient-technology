@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "wall.h"
 
 Renderer::Renderer(sf::RenderWindow *window, GameState *state)
 {
@@ -90,6 +91,11 @@ void Renderer::drawGame()
 		text_screws.setCharacterSize(30);
 		text_screws.setPosition(sf::Vector2f(30,30));
 		m_wnd->draw(text_screws);
+		
+		//wall test
+		//Wall test(sf::FloatRect(0,0,80,80),m_texture_screws);
+		//m_wnd->draw(test);
+		
 	}
 	
 	m_wnd->display();

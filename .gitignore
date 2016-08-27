@@ -6,3 +6,4 @@ CPackSourceConfig.cmake
 Makefile
 sfmlgame
 src/config.h
+~*

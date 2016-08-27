@@ -6,7 +6,7 @@ Renderer::Renderer(sf::RenderWindow *window, GameState *state)
 	m_gst = state;
 
 	// Load all the textures
-	if (!m_texture_background.loadFromFile("assets/bg1.jpg"))
+	if (!m_texture_background.loadFromFile("assets/bg_yellow.png"))
 	{
     	m_wnd->close();
     }

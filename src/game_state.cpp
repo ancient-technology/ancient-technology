@@ -52,68 +52,7 @@ void GameState::updateGameState()
 	}*/
 
 	player->move();
-	/*
-	// Update the player location
-	sf::Vector2f delta;
-
-	switch(m_player_direction)
-	{
-		case DIRECTION_LEFT:
-		delta = sf::Vector2f(-5,0);
-		break;
-
-		case DIRECTION_RIGHT:
-		delta = sf::Vector2f(5,0);
-		break;
-
-		case DIRECTION_UP:
-		delta = sf::Vector2f(0,-5);
-		break;
-
-		case DIRECTION_DOWN:
-		delta = sf::Vector2f(0,5);
-		break;
-
-		default:
-		delta = sf::Vector2f(0,0);
-		break;
-	}
-
-	// Apply delta to the player position
-	sf::Vector2f new_location(getPlayerLocation() + delta);
-
-	// Check if new position is inside the game area
-	if(new_location.x >= 0
-		&& new_location.x + ROBOT_WIDTH <= m_size_x
-		&& new_location.y >= 0
-		&& new_location.y + ROBOT_HEIGHT <= m_size_y)
-	{
-		setPlayerLocation(new_location); // Update location
-	}
 	
-	// Bounding box of the player
-	sf::FloatRect player_box(getPlayerLocation(),sf::Vector2f(ROBOT_WIDTH,ROBOT_HEIGHT));
-
-	std::vector<sf::Vector2f>::iterator s_it;
-	s_it = m_screw_locations.begin();
-
-	// Check for each screw location ...
-	while(s_it != m_screw_locations.end())
-	{
-		// ... if the robot is "eating" the screw
-		sf::FloatRect screw_box(*s_it,sf::Vector2f(SCREW_WIDTH,SCREW_HEIGHT));
-		if(screw_box.intersects(player_box))
-		{
-			// Remove screw
-			m_screw_locations.erase(s_it);
-			m_screws_collected++;
-		}
-		else
-		{
-			// Advance iterator to next screw
-			s_it++;
-		}
-	}//*/
 
 	// Add a new screw when threshold value is reached
 	m_new_screw_threshold += static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -121,10 +60,6 @@ void GameState::updateGameState()
 	{
 		m_new_screw_threshold = 0;
 
-		// New random position for screw inside the game area
-		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(m_size_x-SCREW_WIDTH)));
-		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(m_size_y-SCREW_HEIGHT)));
-		m_screw_locations.push_back(sf::Vector2f(x,y));
 	}
 }
 

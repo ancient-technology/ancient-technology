@@ -8,6 +8,7 @@ Level::Level(std::string levelPath)
 	
 	tex_wall.loadFromFile("assets/wall.png");
 	tex_exit.loadFromFile("assets/exit.png");
+	tex_screws.loadFromFile("assets/screws.png");
 	
 	//
 	initLevel();
@@ -19,6 +20,8 @@ void Level::initLevel()
 	//ifstream brauch const char* bzw const string aka "blablub"
 	const char* myPath = beginLevelPath;
     std::ifstream infile(myPath);
+    
+    int numberOfScrews = 50;
     
     // init before for loop, because need after it for levelbounds
     int row = 0;
@@ -76,12 +79,26 @@ void Level::initLevel()
     // bestimme levelbounds
     //levelBounds = sf::Vector2f(col*WALLSIZE,row*WALLSIZE); 
     
-
-    
+    for(int i = 0; i < numberOfScrews;i++)
+    {
+		// New random position for screw inside the game area
+		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(levelBounds.x-SCREWSIZE)));
+		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(levelBounds.y-SCREWSIZE)));
+		screw_locations.push_back(sf::Vector2f(x,y));
+    }
 }
 
 void Level::draw(sf::RenderTarget& target,sf::RenderStates states)const
 {
+	sf::Sprite sprite_screws;
+	sprite_screws.setTexture(tex_screws);
+
+	for(std::list<sf::Vector2f>::const_iterator s_it = screw_locations.begin();s_it != screw_locations.end();s_it++)
+	{
+		sprite_screws.setPosition(*s_it);
+		target.draw(sprite_screws);
+	}
+
 	//draw walls
 	sf::Sprite sprite_wall;
 	sprite_wall.setTexture(tex_wall);
@@ -94,6 +111,8 @@ void Level::draw(sf::RenderTarget& target,sf::RenderStates states)const
 		
    	}  //*/
    	target.draw(exit);
+   	
+   	
 }
 
 sf::Vector2f Level::getPlayerStart()

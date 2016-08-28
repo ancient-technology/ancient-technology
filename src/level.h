@@ -3,6 +3,7 @@
 
 #define ROBOTSIZE 80
 #define WALLSIZE 80
+#define SCREWSIZE 80
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -42,10 +43,13 @@ private:
 	
 	std::list<Wall> walls;
 	
+	std::list<sf::Vector2f> screw_locations;
+	
 	Wall exit;
 	
 	sf::Texture tex_wall;
 	sf::Texture tex_exit;
+	sf::Texture tex_screws;
 	
 	sf::Vector2f playerStart;
 	

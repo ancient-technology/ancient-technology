@@ -42,7 +42,7 @@ private:
 	void initPlayer();
 	sf::Vector2f moveVector;
 	Level* level;
-	//int collectedCoins;
+	int collectedCoins;
 	
 	//int orientation;
 	void onDeath();

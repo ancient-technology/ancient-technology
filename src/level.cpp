@@ -7,6 +7,7 @@ Level::Level(std::string levelPath)
 	beginLevelPath = &levelPath.at(0);
 	
 	tex_wall.loadFromFile("assets/wall.png");
+	tex_exit.loadFromFile("assets/exit.png");
 	
 	//
 	initLevel();
@@ -25,34 +26,58 @@ void Level::initLevel()
     //load walls etc
     for(; !std::getline(infile,line).eof();++row)
     {
-    	col = 0;
-    	for(; col+2 < line.length();++col)
+    	if(line[0] == '#')
     	{
-    		switch(line[col+1])
+    		if(line[1] == 'E')
     		{
-    			//Player
-    			case 'p':
-    			case 'P':
-    				playerStart = (sf::Vector2f(col*WALLSIZE,row*WALLSIZE));
-    				break;
-    				
-    			//Wall
-    			case 'x':
-    			case 'X':
-					//std::cout<<"push wall \n";
-					Wall newWall(sf::FloatRect(col*WALLSIZE,row*WALLSIZE,WALLSIZE,WALLSIZE),tex_wall);
-					//Wall newWall(sf::FloatRect(50,10,WALLSIZE,WALLSIZE),tex_wall);
-					//std::cout<<"(" << newWall.getRect().left <<","<< newWall.getRect().top <<")   "  << "push wall \n";
-					walls.push_back(newWall);
-					std::cout << col << "  " << row << "\n";
-					std::cout<< walls.size() << "\n";
-					break;
+    			setNextLevel(line.substr(3));
     		}
-    		
+    		//std::cout << line;
     	}
+    	else
+    	{
+    		levelBounds.x =col*WALLSIZE;
+    		levelBounds.y += WALLSIZE;
+			col = -1;
+			for(; col+2 <= line.length();++col)
+			{
+				switch(line[col+1])
+				{
+					//exit
+					case 'e':
+					case 'E':
+						//std::cout<<"push wall \n";
+						exit = Wall(sf::FloatRect(col*WALLSIZE,row*WALLSIZE,WALLSIZE,WALLSIZE),tex_exit);
+						break;
+				
+					//Player
+					case 'p':
+					case 'P':
+						playerStart = (sf::Vector2f(col*WALLSIZE,row*WALLSIZE));
+						break;
+						
+					//Wall
+					case 'x':
+					case 'X':
+						//std::cout<<"push wall \n";
+						Wall newWall(sf::FloatRect(col*WALLSIZE,row*WALLSIZE,WALLSIZE,WALLSIZE),tex_wall);
+						//Wall newWall(sf::FloatRect(50,10,WALLSIZE,WALLSIZE),tex_wall);
+						//std::cout<<"(" << newWall.getRect().left <<","<< newWall.getRect().top <<")   "  << "push wall \n";
+						walls.push_back(newWall);
+						//std::cout << col << "  " << row << "\n";
+						//std::cout<< walls.size() << "\n";
+						break;
+				
+				}
+				
+			}
+		}
     }
     // bestimme levelbounds
-    levelBounds = sf::Vector2f(col*WALLSIZE,row*WALLSIZE); 
+    //levelBounds = sf::Vector2f(col*WALLSIZE,row*WALLSIZE); 
+    
+
+    
 }
 
 void Level::draw(sf::RenderTarget& target,sf::RenderStates states)const
@@ -68,6 +93,7 @@ void Level::draw(sf::RenderTarget& target,sf::RenderStates states)const
 		target.draw(*it);
 		
    	}  //*/
+   	target.draw(exit);
 }
 
 sf::Vector2f Level::getPlayerStart()
@@ -87,7 +113,22 @@ sf::Vector2f Level::wallCollision(sf::Vector2f position,sf::FloatRect* box,sf::V
    	} 
 	return moveVector;
 }
+bool Level::isExit(sf::Vector2f position,sf::FloatRect* box)
+{
+	return exit.isCollision(position,box);
+}
+
 sf::Vector2f Level::getBounds()
 {
 	return levelBounds;
+}
+
+void Level::setNextLevel(std::string nxtLevelPath)
+{
+	nextLevelPath =  nxtLevelPath;
+}
+
+std::string Level::getNextLevel()
+{
+	return nextLevelPath;
 }

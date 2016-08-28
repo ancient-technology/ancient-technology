@@ -1,5 +1,6 @@
 #include "wall.h"
 
+Wall::Wall(){};
 
 Wall::Wall(sf::FloatRect rect,sf::Texture tex)
 {

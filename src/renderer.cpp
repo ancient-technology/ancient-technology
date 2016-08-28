@@ -66,6 +66,8 @@ void Renderer::drawGame()
 		sprite_background.setTexture(m_texture_background);
 		sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
 		m_wnd->draw(sprite_background);
+		
+		
 	}
 	else
 	{
@@ -74,7 +76,7 @@ void Renderer::drawGame()
 
 		sf::Sprite sprite_background;
 		sprite_background.setTexture(m_texture_background);
-		sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
+		sprite_background.setTextureRect(sf::IntRect(0,0,m_gst->level->getBounds().x + m_wnd->getSize().x/2,m_gst->level->getBounds().y + m_wnd->getSize().y/2));
 		m_wnd->draw(sprite_background);
 
 		

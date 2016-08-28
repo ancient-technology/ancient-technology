@@ -45,11 +45,11 @@ void GameState::updateGameState()
 	}
 
 	// Return to menu state when losing the game
-	if(getVisibleScrewsCount() >= 10)
+	/*if(getVisibleScrewsCount() >= 10)
 	{
 		m_game_state = STATE_MENU;
 		return;
-	}
+	}*/
 
 	player->move();
 	/*

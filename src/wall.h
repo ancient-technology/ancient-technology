@@ -6,6 +6,7 @@
 class Wall : public sf::Drawable
 {
 public:
+	Wall();
 	Wall(sf::FloatRect pos,sf::Texture tex);
 	sf::Vector2f getPosition();
 	sf::FloatRect getRect();

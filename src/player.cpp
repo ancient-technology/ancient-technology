@@ -34,13 +34,21 @@ void Player::move()
 	
 	sf::Vector2f mV = moveVector*movementSpeed;
 	
-	std::cout << "move\n" << mV.x << "  " <<mV.y<<"\n";
+	//std::cout << "move\n" << mV.x << "  " <<mV.y<<"\n";
 	
 	
 	
 	// Bounding box of the player(after the move)
 	sf::FloatRect* player_box = new sf::FloatRect(position + mV,sf::Vector2f(ROBOTSIZE,ROBOTSIZE));
 	
+	//check if hit exit
+	if(level->isExit(position + mV,player_box))
+	{
+		resetLevel(new Level(level->getNextLevel()));
+		std::cout << "Exit\n";
+	}
+	
+	//check for wall Collisions
 	mV = level->wallCollision(position,player_box,mV);
 	
 	// Update the player location
@@ -48,15 +56,15 @@ void Player::move()
 	//std::cout << "pos: " << position.x << "," << position.y << "\n";
 	
 
-	std::cout << "move\n" << mV.x << "  " <<mV.y<<"\n";
+	//std::cout << "move\n" << mV.x << "  " <<mV.y<<"\n";
 
 	
 	
 	// Check if new position is inside the game area
 	if(new_location.x >= 0
-		&& new_location.x + ROBOTSIZE <= level->getBounds().x*WALLSIZE
+		&& new_location.x + ROBOTSIZE <= level->getBounds().x
 		&& new_location.y >= 0
-		&& new_location.y + ROBOTSIZE <= level->getBounds().y*WALLSIZE)
+		&& new_location.y + ROBOTSIZE <= level->getBounds().y)
 	{
 	//	std::cout<< collision << "\n";
 		position = new_location; // Update location
@@ -138,7 +146,7 @@ void Player::onDeath()
 }
 void Player::resetLevel(Level* level)
 {
-	this->level = level;
+	*this->level = *level;
 	position = level->getPlayerStart();
 }
 

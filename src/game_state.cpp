@@ -24,7 +24,7 @@ int GameState::getGameState()
 void GameState::startPlaying()
 {
 	m_game_state = STATE_PLAYING;
-
+	
 	level = new Level("levels/level0.dat");
 	setPlayerLocation(level->getPlayerStart());
 	player= new Player(level);

@@ -4,6 +4,7 @@
 #include "level.h"
 #include "animation.hpp"
 #include "animated_sprite.hpp"
+#include <sstream>
 #include <SFML/Graphics.hpp>
 
 #define DIRECTION_NONE 0
@@ -46,7 +47,7 @@ private:
 	void initPlayer();
 	sf::Vector2f moveVector;
 	Level* level;
-	//int collectedCoins;
+	int collectedScrews;
 	
 	//int orientation;
 	void onDeath();
@@ -55,6 +56,7 @@ private:
 	
 
 	sf::Texture tex_player ;
+	sf::Font roboto_bold;
 
 	
 	//soundhandler

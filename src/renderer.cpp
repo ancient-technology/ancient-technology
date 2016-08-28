@@ -66,6 +66,8 @@ void Renderer::drawGame()
 		sprite_background.setTexture(m_texture_background);
 		sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
 		m_wnd->draw(sprite_background);
+		
+		
 	}
 	else
 	{
@@ -74,7 +76,7 @@ void Renderer::drawGame()
 
 		sf::Sprite sprite_background;
 		sprite_background.setTexture(m_texture_background);
-		sprite_background.setTextureRect(sf::IntRect(0,0,m_wnd->getSize().x,m_wnd->getSize().y));
+		sprite_background.setTextureRect(sf::IntRect(0,0,m_gst->level->getBounds().x,m_gst->level->getBounds().y));
 		m_wnd->draw(sprite_background);
 
 		
@@ -103,16 +105,9 @@ void Renderer::drawGame()
 		//m_wnd->draw(sprite_player);
 		m_wnd->draw(*m_gst->player);
 		
-		std::stringstream str;
-		str << m_gst->getCollectedScrewsCount() << " collected\n" << m_gst->getVisibleScrewsCount() << " visible";
+		
 
-		// Game texts
-		sf::Text text_screws;
-		text_screws.setFont(m_bold_font);
-		text_screws.setString(str.str());
-		text_screws.setCharacterSize(30);
-		text_screws.setPosition(sf::Vector2f(30,30));
-		m_wnd->draw(text_screws);
+		
 		
 		
 		

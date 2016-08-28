@@ -23,42 +23,44 @@ void EventHandler::handleEvents()
         {
         	m_gst->startPlaying();
         }
-        
-        // Get robot direction
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-        	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        		m_gst->player->setMovementDirection(DIRECTION_LEFT_UP);
-        	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        		m_gst->player->setMovementDirection(DIRECTION_LEFT_DOWN);
-        	else
-        		m_gst->player->setMovementDirection(DIRECTION_LEFT);
-        //	hero->setOrientation(DIRECTION_LEFT);
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-        	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        		m_gst->player->setMovementDirection(DIRECTION_RIGHT_UP);
-        	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        		m_gst->player->setMovementDirection(DIRECTION_RIGHT_DOWN);
-        	else
-        		m_gst->player->setMovementDirection(DIRECTION_RIGHT);
-        //	hero->setOrientation(DIRECTION_RIGHT);
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-        	m_gst->player->setMovementDirection(DIRECTION_UP);
-        //	hero->setOrientation(DIRECTION_UP);
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-        	m_gst->player->setMovementDirection(DIRECTION_DOWN);
-        //	hero->setOrientation(DIRECTION_DOWN);
-        }
-        else
-        {
-        	m_gst->player->setMovementDirection(DIRECTION_NONE);
-        } //*/
+
+		if(m_gst->getGameState() == STATE_PLAYING) {
+			// Get robot direction
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			{
+				if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+					m_gst->player->setMovementDirection(DIRECTION_LEFT_UP);
+				else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+					m_gst->player->setMovementDirection(DIRECTION_LEFT_DOWN);
+				else
+					m_gst->player->setMovementDirection(DIRECTION_LEFT);
+			//	hero->setOrientation(DIRECTION_LEFT);
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			{
+				if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+					m_gst->player->setMovementDirection(DIRECTION_RIGHT_UP);
+				else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+					m_gst->player->setMovementDirection(DIRECTION_RIGHT_DOWN);
+				else
+					m_gst->player->setMovementDirection(DIRECTION_RIGHT);
+			//	hero->setOrientation(DIRECTION_RIGHT);
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
+				m_gst->player->setMovementDirection(DIRECTION_UP);
+			//	hero->setOrientation(DIRECTION_UP);
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				m_gst->player->setMovementDirection(DIRECTION_DOWN);
+			//	hero->setOrientation(DIRECTION_DOWN);
+			}
+			else
+			{
+				m_gst->player->setMovementDirection(DIRECTION_NONE);
+			} //*/
+		}
         
         if(event.type == sf::Event::KeyPressed)
 		{

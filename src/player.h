@@ -7,7 +7,7 @@
 #include <sstream>
 #include <SFML/Graphics.hpp>
 
-#define DIRECTION_NONE 0
+#define DIRECTION_NONE 9
 #define DIRECTION_LEFT 1
 #define DIRECTION_RIGHT 2
 #define DIRECTION_UP 3

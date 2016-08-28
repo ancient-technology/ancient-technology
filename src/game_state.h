@@ -9,7 +9,6 @@
 #define STATE_MENU 0
 #define STATE_PLAYING 1
 
-#define DIRECTION_NONE 0
 #define DIRECTION_LEFT 1
 #define DIRECTION_RIGHT 2
 #define DIRECTION_UP 3

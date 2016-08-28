@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	
+	moveVector = sf::Vector2f(0,0);
 }
 
 
@@ -33,9 +33,7 @@ Player::Player(Level* lev)
 
 void Player::move()
 {
-	
-	
-	
+	std::cout <<"move: (" << moveVector.x << ", " << moveVector.y << ")"<<std::endl;
 	sf::Vector2f mV = moveVector*movementSpeed;
 	
 	//std::cout << "move\n" << mV.x << "  " <<mV.y<<"\n";
@@ -81,7 +79,6 @@ void Player::move()
 
 void Player::setMovementDirection(int direction)
 {
-	
 	switch(direction)
 	{
 		case DIRECTION_LEFT:
@@ -114,6 +111,10 @@ void Player::setMovementDirection(int direction)
 
 		case DIRECTION_DOWN:
 		moveVector = sf::Vector2f(0,1);
+		break;
+
+		case DIRECTION_NONE:
+		moveVector = sf::Vector2f(0,0);
 		break;
 
 		default:

@@ -21,9 +21,13 @@ Player::Player(Level* lev)
 //	reload_time = 40;
 //	shoot_threshold = 0;
 //	leben = 100.0f;
-	tex_player.loadFromFile("assets/robot.png");
+	tex_player.loadFromFile("assets/robot_ani.png");
+	ani = new Animation();
+	ani->setSpriteSheet(tex_player);
+	ani->addFrame(sf::IntRect(0, 0, 80, 80));
+	ani->addFrame(sf::IntRect(80, 0, 80, 80));
 
-
+	animatedSprite = new AnimatedSprite(sf::seconds(0.2), true, false);
 }
 
 
@@ -80,10 +84,13 @@ void Player::move()
 			coin_it++;
 	} //*/
 	
+	animatedSprite->update(sf::seconds(0.02));
+	animatedSprite->setPosition(position);
 }
 
 void Player::setMovementDirection(int direction)
 {
+	
 	switch(direction)
 	{
 		case DIRECTION_LEFT:
@@ -119,7 +126,7 @@ void Player::setMovementDirection(int direction)
 		break;
 
 		default:
-		moveVector = sf::Vector2f(0,0);
+		//moveVector = sf::Vector2f(0,0);
 		break;
 	}
 }
@@ -144,10 +151,13 @@ void Player::resetLevel(Level* level)
 
 void Player::draw(sf::RenderTarget& target,sf::RenderStates states)const
 {
-	sf::Sprite sprite_player;
+	/*sf::Sprite sprite_playeVr;
 	sprite_player.setTexture(tex_player);
 	sprite_player.setPosition(position);
-	target.draw(sprite_player);
 	
+	target.draw(sprite_player);*/
 
+	sf::Time t = sf::seconds(0.2);
+	animatedSprite->play(*ani);
+	target.draw(*animatedSprite);
 }

@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include "level.h"
+#include "animation.hpp"
+#include "animated_sprite.hpp"
 #include <SFML/Graphics.hpp>
 
 #define DIRECTION_NONE 0
@@ -35,6 +37,8 @@ public:
 	//prüft ob player lebt und gibt lebenspunkte zurück
 	//float checkLife();
 	void resetLevel(Level* level);
+	Animation *ani;
+	AnimatedSprite *animatedSprite;
 	
 private:
 	virtual void draw(sf::RenderTarget& target,sf::RenderStates states)const;

@@ -117,7 +117,7 @@ void Player::setMovementDirection(int direction)
 		break;
 
 		default:
-		//moveVector = sf::Vector2f(0,0);
+		moveVector = sf::Vector2f(0,0);
 		break;
 	}
 }

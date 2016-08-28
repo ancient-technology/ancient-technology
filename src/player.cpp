@@ -14,7 +14,7 @@ Player::Player(Level* lev)
 //	initPlayer();
 	movementSpeed = 8;
 	level = lev;
-//	collectedCoins = 0;
+	collectedScrews = 0;
 //	orientation = DIRECTION_LEFT;
 //	s = SoundHandler::getSoundHandler();
 //	shooting = false;
@@ -22,6 +22,7 @@ Player::Player(Level* lev)
 //	shoot_threshold = 0;
 //	leben = 100.0f;
 	tex_player.loadFromFile("assets/robot.png");
+	roboto_bold.loadFromFile("assets/Roboto-Bold.ttf");
 
 
 }
@@ -69,24 +70,7 @@ void Player::move()
 	//	std::cout<< collision << "\n";
 		position = new_location; // Update location
 	}
-	/*
-	//collect coins
-	std::vector<sf::Vector2f>*  coins = level->getCoins();
-	std::vector<sf::Vector2f>::iterator coin_it;
-	// Check for each coin ...
-	for(coin_it = level->getCoins()->begin();coin_it != level->getCoins()->end();)
-	{
-		sf::FloatRect coinRect(*coin_it,sf::Vector2f(COIN_WIDTH,COIN_HEIGHT));
-		if(coinRect.intersects(player_box))
-		{
-			collectedCoins++;
-			
-			level->getCoins()->erase(coin_it);
-		//	std::cout<<"coins: " << collectedCoins<<"\n";
-		}
-		else
-			coin_it++;
-	} //*/
+	collectedScrews += level->screwCollision(position,player_box);
 	
 }
 
@@ -157,5 +141,15 @@ void Player::draw(sf::RenderTarget& target,sf::RenderStates states)const
 	sprite_player.setPosition(position);
 	target.draw(sprite_player);
 	
-
+	
+	//draw stats
+	std::stringstream str;
+	str << collectedScrews << " Schrauben gesammelt\n";
+	
+	sf::Text stats;
+	stats.setFont(roboto_bold);
+	stats.setString(str.str());
+	stats.setCharacterSize(30);
+	stats.setPosition(position - sf::Vector2f(600,350));
+	target.draw(stats);
 }

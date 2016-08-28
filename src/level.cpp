@@ -9,6 +9,7 @@ Level::Level(std::string levelPath)
 	tex_wall.loadFromFile("assets/wall.png");
 	tex_exit.loadFromFile("assets/exit.png");
 	tex_screws.loadFromFile("assets/screws.png");
+	tex_workbench.loadFromFile("assets/workbench.png");
 	
 	//
 	initLevel();
@@ -21,7 +22,7 @@ void Level::initLevel()
 	const char* myPath = beginLevelPath;
     std::ifstream infile(myPath);
     
-    int numberOfScrews = 50;
+    int numberOfScrews = 0;
     
     // init before for loop, because need after it for levelbounds
     int row = 0;
@@ -34,6 +35,12 @@ void Level::initLevel()
     		if(line[1] == 'E')
     		{
     			setNextLevel(line.substr(3));
+    		}
+    		else if(line[1] == 'S')
+    		{
+    			//line = line.substr(3);
+    			std::string l = line;
+    			numberOfScrews = atoi(l.substr(3).c_str());
     		}
     		//std::cout << line;
     	}
@@ -58,7 +65,19 @@ void Level::initLevel()
 					case 'P':
 						playerStart = (sf::Vector2f(col*WALLSIZE,row*WALLSIZE));
 						break;
-						
+					//Player
+					case 's':
+					case 'S':
+						screw_locations.push_back(sf::Vector2f(col*WALLSIZE,row*WALLSIZE));
+						break;
+					
+					//exit
+					case 'w':
+					case 'W':
+						//std::cout<<"push wall \n";
+						workbench = Wall(sf::FloatRect(col*WALLSIZE,row*WALLSIZE,WALLSIZE,WALLSIZE),tex_workbench);
+						break;
+							
 					//Wall
 					case 'x':
 					case 'X':
@@ -111,6 +130,7 @@ void Level::draw(sf::RenderTarget& target,sf::RenderStates states)const
 		
    	}  //*/
    	target.draw(exit);
+   	target.draw(workbench);
    	
    	
 }
@@ -132,6 +152,31 @@ sf::Vector2f Level::wallCollision(sf::Vector2f position,sf::FloatRect* box,sf::V
    	} 
 	return moveVector;
 }
+
+int Level::screwCollision(sf::Vector2f position,sf::FloatRect* box)
+{
+	int screws_collected = 0;
+	for (std::list<sf::Vector2f>::iterator it = screw_locations.begin(); it != screw_locations.end();)
+   	{
+		// ... if the robot is "eating" the screw
+		sf::FloatRect screw_box(*it,sf::Vector2f(SCREWSIZE,SCREWSIZE));
+		if(screw_box.intersects(*box))
+		{
+			std::cout << it->x << " \n ";
+			// Remove screw
+			it = screw_locations.erase(it);
+			screws_collected++;
+		}
+		else
+		{
+			// Advance iterator to next screw
+			++it;
+		}
+		
+   	} 
+	return screws_collected;
+}
+
 bool Level::isExit(sf::Vector2f position,sf::FloatRect* box)
 {
 	return exit.isCollision(position,box);

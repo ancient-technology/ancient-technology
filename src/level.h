@@ -20,6 +20,7 @@ public:
 	sf::Vector2f getPlayerStart();
 	//manipuliert den moveVector sodass man nur bis zur Wand läuft
 	sf::Vector2f wallCollision(sf::Vector2f position,sf::FloatRect* box,sf::Vector2f moveVector);
+	int screwCollision(sf::Vector2f position,sf::FloatRect* box);
 	
 	bool isExit(sf::Vector2f position,sf::FloatRect* box);
 	
@@ -46,10 +47,12 @@ private:
 	std::list<sf::Vector2f> screw_locations;
 	
 	Wall exit;
+	Wall workbench;
 	
 	sf::Texture tex_wall;
 	sf::Texture tex_exit;
 	sf::Texture tex_screws;
+	sf::Texture tex_workbench;
 	
 	sf::Vector2f playerStart;
 	

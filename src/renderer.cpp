@@ -105,16 +105,9 @@ void Renderer::drawGame()
 		//m_wnd->draw(sprite_player);
 		m_wnd->draw(*m_gst->player);
 		
-		std::stringstream str;
-		str << m_gst->getCollectedScrewsCount() << " collected\n" << m_gst->getVisibleScrewsCount() << " visible";
+		
 
-		// Game texts
-		sf::Text text_screws;
-		text_screws.setFont(m_bold_font);
-		text_screws.setString(str.str());
-		text_screws.setCharacterSize(30);
-		text_screws.setPosition(sf::Vector2f(30,30));
-		m_wnd->draw(text_screws);
+		
 		
 		
 		

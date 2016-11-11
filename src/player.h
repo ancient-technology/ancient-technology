@@ -18,6 +18,9 @@
 #define DIRECTION_LEFT_DOWN 7
 #define DIRECTION_RIGHT_DOWN 8
 
+#define COLLISION_WORKBENCH 1
+#dfeine COLLISION_NONE 0
+
 class Player: public sf::Drawable
 {
 public:
@@ -40,6 +43,8 @@ public:
 	void resetLevel(Level* level);
 	Animation *ani;
 	AnimatedSprite *animatedSprite;
+	int detectCollision;
+	float movementSpeed;
 	
 private:
 	virtual void draw(sf::RenderTarget& target,sf::RenderStates states)const;
@@ -52,7 +57,7 @@ private:
 	//int orientation;
 	void onDeath();
 	
-	float movementSpeed;
+
 	
 
 	sf::Texture tex_player ;

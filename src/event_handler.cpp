@@ -61,6 +61,21 @@ void EventHandler::handleEvents()
 				m_gst->player->setMovementDirection(DIRECTION_NONE);
 			} //*/
 		}
+		else if (m_gst->getGameState() == STATE_SHOP)
+		{
+			if(event.type == sf::Event::KeyPressed)
+			{
+				switch(event.key.code)
+				{
+					case sf::Keyboard::S:
+						m_gst->shop->upgradeSchuhe();
+						break;
+					case sf::Keyboard::Q:
+						m_gst->m_game_state = STATE_PLAYING;
+						break;
+				}
+			}
+		}
         
         if(event.type == sf::Event::KeyPressed)
 		{

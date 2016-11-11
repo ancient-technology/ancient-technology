@@ -28,6 +28,7 @@ void GameState::startPlaying()
 	level = new Level("levels/level0.dat");
 	setPlayerLocation(level->getPlayerStart());
 	player= new Player(level);
+	shop = new Shop(player);
 
 	// Reset all values
 	m_screws_collected = 0;
@@ -38,19 +39,17 @@ void GameState::startPlaying()
 
 void GameState::updateGameState()
 {
+	
 	// Do nothing if the game is not in playing state
 	if(m_game_state != STATE_PLAYING)
 	{
 		return;
 	}
-
-	// Return to menu state when losing the game
-	/*if(getVisibleScrewsCount() >= 10)
+	//check player collision in last move
+	if(player -> detectCollision == COLLISION_WORKBENCH)
 	{
-		m_game_state = STATE_MENU;
-		return;
-	}*/
-
+		m_game_state = STATE_SHOP;
+	}
 	player->move();
 	
 

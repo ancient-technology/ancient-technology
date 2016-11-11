@@ -182,6 +182,11 @@ bool Level::isExit(sf::Vector2f position,sf::FloatRect* box)
 	return exit.isCollision(position,box);
 }
 
+bool Level::isWorkbench(sf::Vector2f position,sf::FloatRect* box)
+{
+	return workbench.isCollision(position,box);
+}
+
 sf::Vector2f Level::getBounds()
 {
 	return levelBounds;

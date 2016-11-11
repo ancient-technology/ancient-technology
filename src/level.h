@@ -23,7 +23,7 @@ public:
 	int screwCollision(sf::Vector2f position,sf::FloatRect* box);
 	
 	bool isExit(sf::Vector2f position,sf::FloatRect* box);
-	
+	bool isWorkbench(sf::Vector2f position,sf::FloatRect* box);
 //	bool isCollision(sf::Vector2f entPosition,sf::FloatRect* box);
 	sf::Vector2f getBounds();
 	

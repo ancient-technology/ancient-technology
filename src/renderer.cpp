@@ -69,6 +69,10 @@ void Renderer::drawGame()
 		
 		
 	}
+	else if(m_gst->getGameState() == STATE_SHOP)
+	{
+		m_wnd->draw(*m_gst->shop);
+	}
 	else
 	{
 		sf::View view = sf::View(m_gst->player->getPosition(), sf::Vector2f(1280,800));

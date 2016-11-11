@@ -5,9 +5,11 @@
 #include <vector>
 #include "level.h"
 #include "player.h"
+#include "shop.h"
 
 #define STATE_MENU 0
 #define STATE_PLAYING 1
+#define STATE_SHOP 2
 
 #define DIRECTION_LEFT 1
 #define DIRECTION_RIGHT 2
@@ -37,10 +39,12 @@ public:
 	int getCollectedScrewsCount();
 	Level* level;
 	Player* player;
+	Shop* shop;
+	int m_game_state;
 		
 		
 private:
-	int m_game_state;
+	
 	int m_size_x;
 	int m_size_y;
 	int m_player_direction;

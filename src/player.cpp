@@ -12,9 +12,10 @@ Player::Player(Level* lev)
 	position = lev->getPlayerStart();
 //	std::cout << "pos: " << position.x << "," << position.y << "\n";
 //	initPlayer();
-	movementSpeed = 8;
+	movementSpeed = 4;
 	level = lev;
 	collectedScrews = 0;
+	detectCollision = 0;
 //	orientation = DIRECTION_LEFT;
 //	s = SoundHandler::getSoundHandler();
 //	shooting = false;
@@ -47,8 +48,10 @@ void Player::move()
 	if(level->isExit(position + mV,player_box))
 	{
 		resetLevel(new Level(level->getNextLevel()));
-		std::cout << "Exit\n";
+		//std::cout << "Exit\n";
 	}
+	
+	
 	
 	//check for wall Collisions
 	mV = level->wallCollision(position,player_box,mV);
@@ -57,19 +60,28 @@ void Player::move()
 	sf::Vector2f new_location(position + mV);
 	//std::cout << "pos: " << position.x << "," << position.y << "\n";
 	
+	
+	
 
 	//std::cout << "move\n" << mV.x << "  " <<mV.y<<"\n";
 
 	
-	
+	//check if hit workbench
+	if(level->isWorkbench(position + mV,player_box))
+	{
+		//resetLevel(new Level(level->getNextLevel()));
+		std::cout << "Workbench\n";
+		detectCollision = COLLISION_WORKBENCH;
+	}
 	// Check if new position is inside the game area
-	if(new_location.x >= 0
+	else if(new_location.x >= 0
 		&& new_location.x + ROBOTSIZE <= level->getBounds().x
 		&& new_location.y >= 0
 		&& new_location.y + ROBOTSIZE <= level->getBounds().y)
 	{
 	//	std::cout<< collision << "\n";
 		position = new_location; // Update location
+		detectCollision = COLLISION_NONE;
 	}
 	collectedScrews += level->screwCollision(position,player_box);
 	
@@ -155,7 +167,7 @@ void Player::draw(sf::RenderTarget& target,sf::RenderStates states)const
 	
 	//draw stats
 	std::stringstream str;
-	str << collectedScrews << " Schrauben gesammelt\n";
+	str << collectedScrews << " Bauteile gesammelt\n";
 	
 	sf::Text stats;
 	stats.setFont(roboto_bold);
